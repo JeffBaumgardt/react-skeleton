@@ -1,54 +1,55 @@
 {
-  "name": "react-skeleton",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.20",
-    "@types/node": "12.11.7",
-    "@types/react": "16.9.11",
-    "@types/react-dom": "16.9.3",
-    "@types/react-redux": "^7.1.5",
-    "@types/react-router-dom": "^5.1.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
-    "typescript": "3.6.4"
-  },
-  "devDependencies": {
-    "react-tools": "https://github.com/sixgill/react-tools.git"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "react-tools lint"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "peerDependencies": {
-    "eslint": "^6.6.0",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^23.0.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.2.0"
-  },
-  "resolutions": {
-    "react-scripts/eslint-plugin-react": "^7.16.0"
-  }
+	"name": "react-skeleton",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@types/jest": "24.0.20",
+		"@types/node": "12.11.7",
+		"@types/react": "16.9.11",
+		"@types/react-dom": "16.9.3",
+		"@types/react-redux": "^7.1.5",
+		"@types/react-router-dom": "^5.1.0",
+		"react": "^16.11.0",
+		"react-dom": "^16.11.0",
+		"react-redux": "^7.1.1",
+		"react-router-dom": "^5.1.2",
+		"react-scripts": "3.2.0",
+		"redux": "^4.0.4",
+		"redux-thunk": "^2.3.0",
+		"typescript": "3.6.4"
+	},
+	"devDependencies": {
+		"react-tools": "https://github.com/sixgill/react-tools.git"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"lint": "react-tools lint",
+		"format": "react-tools format"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"peerDependencies": {
+		"eslint": "^6.6.0",
+		"eslint-plugin-babel": "^5.3.0",
+		"eslint-plugin-import": "^2.18.2",
+		"eslint-plugin-jest": "^23.0.2",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-react": "^7.16.0",
+		"eslint-plugin-react-hooks": "^2.2.0"
+	},
+	"resolutions": {
+		"react-scripts/eslint-plugin-react": "^7.16.0"
+	}
 }

@@ -8926,8 +8926,8 @@ react-scripts@3.2.0:
     fsevents "2.0.7"
 
 "react-tools@https://github.com/sixgill/react-tools.git":
-  version "1.4.1"
-  resolved "https://github.com/sixgill/react-tools.git#68fde10a4f6ef9ddc40cbb4c869dd6367c4247fd"
+  version "1.4.2"
+  resolved "https://github.com/sixgill/react-tools.git#b26612b6db2bf0438595e7323c29b31216404c85"
   dependencies:
     arrify "^2.0.1"
     babel-jest "^24.9.0"
