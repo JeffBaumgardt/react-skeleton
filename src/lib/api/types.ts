@@ -1,12 +1,13 @@
 import {APIProviderProps} from 'context/api'
 
-export interface UseRequestProps<TData, TQueryParams> {
+export interface UseRequestProps<TData, TRequestBody, TQueryParams> {
     path: string
     queryParams?: TQueryParams
     requestOptions?: APIProviderProps['requestOptions']
     resolve?: (data: any) => TData
     base?: APIProviderProps['basePath']
-    method?: "POST" | "GET" | "DELETE" | "PATCH"
+    method: "POST" | "GET" | "DELETE" | "PATCH"
+    body?: TRequestBody
 }
 
 export interface RequestError<TError> {

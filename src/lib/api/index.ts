@@ -6,15 +6,16 @@ import {API_ROOT} from 'config'
 
 export {useRequest} from './useRequest'
 
-export default async function<TData, TQueryParams>(
-    props: UseRequestProps<TData, TQueryParams>,
+export default async function<TData, TRequestBody, TQueryParams>(
+    props: UseRequestProps<TData, TRequestBody, TQueryParams>,
     signal?: AbortSignal
 ) {
     const {
         base = API_ROOT,
         path,
         queryParams = {},
-        resolve = (d: any) => d as TData
+        resolve = (d: any) => d as TData,
+        body
     } = props
 
     // Read jwt from local storage and add auth header
@@ -28,6 +29,10 @@ export default async function<TData, TQueryParams>(
         ...defaultRequestInit,
         ...requestOptions,
         signal
+    }
+
+    if (requestInit.method && ['GET', 'POST', 'PUT', 'PATCH'].includes(requestInit.method)) {
+        requestInit.body = typeof body === 'object' ? JSON.stringify(body) : ((body as unknown) as string)
     }
 
     try {

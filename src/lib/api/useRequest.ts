@@ -5,8 +5,8 @@ import {request, defaultRequestInit, isCancellable} from './request'
 import {getToken} from 'lib/auth'
 import {UseRequestProps, RequestState, UseRequestReturn, Cancelable} from './types'
 
-async function fetchData<TData, TError, TQueryParams>(
-    props: UseRequestProps<TData, TQueryParams>,
+async function fetchData<TData, TRequestBody, TError, TQueryParams>(
+    props: UseRequestProps<TData, TRequestBody, TQueryParams>,
     state: RequestState<TData, TError>,
     setState: (newState: RequestState<TData, TError>) => void,
     context: APIProviderProps,
@@ -16,7 +16,8 @@ async function fetchData<TData, TError, TQueryParams>(
         base = context.basePath,
         path,
         resolve = (d: any) => d as TData,
-        queryParams = {}
+        queryParams = {},
+        body
     } = props
 
     if (state.loading) {
@@ -43,6 +44,10 @@ async function fetchData<TData, TError, TQueryParams>(
         ...contextRequestOptions,
         ...requestOptions,
         signal
+    }
+
+    if (requestInit.method && ['GET', 'POST', 'PUT', 'PATCH'].includes(requestInit.method)) {
+        requestInit.body = typeof body === 'object' ? JSON.stringify(body) : ((body as unknown) as string)
     }
 
     try {
