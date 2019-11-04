@@ -3,27 +3,29 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@types/jest": "24.0.20",
-		"@types/node": "12.11.7",
-		"@types/react": "16.9.11",
-		"@types/react-dom": "16.9.3",
-		"@types/react-redux": "^7.1.5",
-		"@types/react-router-dom": "^5.1.0",
+		"query-string": "^6.8.3",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0",
 		"react-redux": "^7.1.1",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "3.2.0",
 		"redux": "^4.0.4",
-		"redux-thunk": "^2.3.0",
-		"typescript": "3.6.4"
+		"redux-thunk": "^2.3.0"
 	},
 	"devDependencies": {
-		"react-tools": "https://github.com/sixgill/react-tools.git"
+		"@types/jest": "24.0.20",
+		"@types/node": "12.11.7",
+		"@types/react": "16.9.11",
+		"@types/react-dom": "16.9.3",
+		"@types/react-redux": "^7.1.5",
+		"@types/react-router-dom": "^5.1.0",
+		"env-cmd": "^10.0.1",
+		"react-tools": "https://github.com/sixgill/react-tools.git",
+		"typescript": "3.6.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
+		"start": "env-cmd -e development react-scripts start",
+		"build": "env-cmd -e development react-scripts build",
 		"test": "react-scripts test",
 		"lint": "react-tools lint",
 		"format": "react-tools format"
