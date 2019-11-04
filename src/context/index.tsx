@@ -6,17 +6,15 @@ import {APIProvider} from './api'
 import {AppConfig} from '../appConfig'
 
 const AppProviders: React.FC<{config: AppConfig}> = ({children, config}) => {
-    return (
+  return (
+    <APIProvider basePath={config.API_ROOT}>
+      <AuthProvider>
         <BrowserRouter>
-            <APIProvider basePath={config.API_ROOT}>
-                <AuthProvider>
-                    <ReduxProvider>
-                        {children}
-                    </ReduxProvider>
-                </AuthProvider>
-            </APIProvider>
+          <ReduxProvider>{children}</ReduxProvider>
         </BrowserRouter>
-    )
+      </AuthProvider>
+    </APIProvider>
+  )
 }
 
 export default AppProviders
