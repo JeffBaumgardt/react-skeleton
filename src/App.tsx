@@ -1,6 +1,6 @@
 import React from 'react'
 import AppProviders from 'context'
-import config from './config'
+import config from './appConfig'
 
 const App: React.FC = () => {
   return (

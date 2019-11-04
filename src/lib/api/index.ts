@@ -2,7 +2,7 @@ import {getToken} from 'lib/auth'
 import {request, defaultRequestInit} from './request'
 import {resolvePath} from './resolvePath'
 import {UseRequestProps} from './types'
-import {API_ROOT} from 'config'
+import {API_ROOT} from 'appConfig'
 
 export {useRequest} from './useRequest'
 

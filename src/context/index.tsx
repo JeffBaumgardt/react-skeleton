@@ -3,7 +3,7 @@ import {BrowserRouter} from 'react-router-dom'
 import ReduxProvider from './redux'
 import {AuthProvider} from './auth'
 import {APIProvider} from './api'
-import {AppConfig} from '../config'
+import {AppConfig} from '../appConfig'
 
 const AppProviders: React.FC<{config: AppConfig}> = ({children, config}) => {
     return (
