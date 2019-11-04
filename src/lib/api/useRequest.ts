@@ -71,8 +71,8 @@ async function fetchData<TData, TRequestBody, TError, TQueryParams>(
 type FetchData = typeof fetchData
 type CancellableFetchData = FetchData | (FetchData & Cancelable)
 
-export function useRequest<TData = any, TError = any, TQueryParams = {[key: string]: any}>(
-    props: UseRequestProps<TData, TQueryParams>
+export function useRequest<TData = any, TError = any, TQueryParams = {[key: string]: any}, TRequestBody = any>(
+    props: UseRequestProps<TData, TRequestBody, TQueryParams>
 ): UseRequestReturn<TData, TError> {
     const context = React.useContext(APIContext)
 
