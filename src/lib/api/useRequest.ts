@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {APIContext, APIProviderProps} from 'context/api'
+import {getToken} from 'lib/auth'
 import {resolvePath} from './resolvePath'
 import {request, defaultRequestInit, isCancellable} from './request'
-import {getToken} from 'lib/auth'
 import {UseRequestProps, RequestState, UseRequestReturn, Cancelable} from './types'
 
 async function fetchData<TData, TRequestBody, TError, TQueryParams>(
@@ -11,7 +11,7 @@ async function fetchData<TData, TRequestBody, TError, TQueryParams>(
     setState: (newState: RequestState<TData, TError>) => void,
     context: APIProviderProps,
     abortController: React.MutableRefObject<AbortController>
-) {
+): Promise<void> {
     const {
         base = context.basePath,
         path,
@@ -95,7 +95,7 @@ export function useRequest<TData = any, TError = any, TQueryParams = {[key: stri
             abortController.current.abort()
             abortController.current = new AbortController()
         }
-    }, [props.path, props.base, props.resolve, props.queryParams, props.requestOptions])
+    }, [context, props, requestData, state])
 
     return {
         ...state,

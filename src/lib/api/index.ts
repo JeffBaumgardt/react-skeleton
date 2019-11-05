@@ -1,8 +1,8 @@
 import {getToken} from 'lib/auth'
+import {API_ROOT} from 'appConfig'
 import {request, defaultRequestInit} from './request'
 import {resolvePath} from './resolvePath'
 import {UseRequestProps} from './types'
-import {API_ROOT} from 'appConfig'
 
 export {useRequest} from './useRequest'
 
@@ -35,16 +35,12 @@ export default async function<TData, TRequestBody, TQueryParams>(
         requestInit.body = typeof body === 'object' ? JSON.stringify(body) : ((body as unknown) as string)
     }
 
-    try {
-        const response = await request(resolvePath(base, path, {...queryParams}), requestInit)
-        const {content} = response
+    const response = await request(resolvePath(base, path, {...queryParams}), requestInit)
+    const {content} = response
 
-        if (signal && signal.aborted) {
-            return
-        }
-
-        return resolve(content)
-    } catch (err) {
-        throw err
+    if (signal && signal.aborted) {
+        return null
     }
+
+    return resolve(content)
 }

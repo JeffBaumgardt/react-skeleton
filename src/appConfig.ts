@@ -1,5 +1,5 @@
 export interface AppConfig {
-    API_ROOT: string
+    API_ROOT: string;
 }
 
 if (!process.env || !process.env.REACT_APP_API_ROOT) {

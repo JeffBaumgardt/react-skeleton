@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 export interface APIProviderProps {
-    basePath: string
-    requestOptions?: (() => Partial<RequestInit>) | Partial<RequestInit>
+    basePath: string;
+    requestOptions?: (() => Partial<RequestInit>) | Partial<RequestInit>;
 }
 
 export const APIContext = React.createContext<Required<APIProviderProps>>({

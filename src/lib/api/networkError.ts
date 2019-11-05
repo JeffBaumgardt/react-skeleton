@@ -1,10 +1,10 @@
 interface NetworkResponse extends Partial<Response> {
-    content?: any
+    content?: any;
 }
 
 interface Network extends Partial<RequestInit> {
-    reason: string,
-    response?: NetworkResponse
+    reason: string;
+    response?: NetworkResponse;
 }
 
 class NetworkError extends Error {
@@ -20,9 +20,6 @@ class NetworkError extends Error {
 
         this.message = message
         this.name = 'NetworkError'
-
-        const status = response ? response.status : 0
-        const statusText = response ? response.statusText : ''
         this.network = {...options, reason, ...response}
 
         Object.setPrototypeOf(this, NetworkError.prototype)
