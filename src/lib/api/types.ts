@@ -1,4 +1,4 @@
-import {APIProviderProps} from 'context/api'
+import { APIProviderProps } from 'context/api'
 
 export interface UseRequestProps<TData, TRequestBody, TQueryParams> {
     path: string;
@@ -33,9 +33,9 @@ export interface Cancelable {
 
 export type RequestOptions = Partial<RequestInit>
 
-export interface RequestResponse {
+export interface RequestResponse<TResponseContent> {
     status: Response['status'];
     statusText: Response['statusText'];
     headers: Headers;
-    content: any;
+    content: TResponseContent;
 }

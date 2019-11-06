@@ -12,7 +12,10 @@ export const defaultRequestInit: Partial<RequestInit> = {
     method: 'GET',
 }
 
-export const baseRequest = async (url: ResolvePath, requestInit: RequestOptions): Promise<RequestResponse> => {
+export async function baseRequest<TResponseContent>(
+    url: ResolvePath,
+    requestInit: RequestOptions,
+): Promise<RequestResponse<TResponseContent>> {
     const thisRequest = new Request(url, requestInit)
 
     try {
@@ -20,7 +23,7 @@ export const baseRequest = async (url: ResolvePath, requestInit: RequestOptions)
         const content = await response.json()
 
         if (response.status > 400 || response.status < 100) {
-            throw new NetworkError('status', requestInit, response)
+            throw new NetworkError('status', requestInit, {...response, content})
         }
 
         return {

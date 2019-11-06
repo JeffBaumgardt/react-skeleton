@@ -3,12 +3,11 @@ import {API_ROOT} from 'appConfig'
 import {baseRequest, defaultRequestInit} from './baseRequest'
 import {resolvePath} from './resolvePath'
 import {UseRequestProps, RequestResponse} from './types'
-import NetworkError from './networkError'
 
-export default async function request<TData, TRequestBody, TQueryParams>(
+export default async function request<TData, TRequestBody, TQueryParams, TResponseContent>(
     props: UseRequestProps<TData, TRequestBody, TQueryParams>,
     signal?: AbortSignal,
-): Promise<RequestResponse | undefined> {
+): Promise<RequestResponse<TResponseContent>> {
     const {base = API_ROOT, path, queryParams = {}, body} = props
 
     // Read jwt from local storage and add auth header
@@ -33,3 +32,4 @@ export default async function request<TData, TRequestBody, TQueryParams>(
 }
 
 export {useRequest} from './useRequest'
+export * from './types'

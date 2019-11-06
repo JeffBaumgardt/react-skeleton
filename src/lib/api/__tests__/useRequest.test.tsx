@@ -167,7 +167,7 @@ describe('API - useRequest hook', () => {
             .reply(200, {id: 2})
 
         const PathComponent = ({path}: {path: string}) => {
-            const {data, loading} = useRequest<{id: number}>({path})
+            const {data, loading} = useRequest<{id: number}, {}, {id: number}>({path})
 
             return loading ? <span>Loading...</span> : <span>ID: {data && data.id}</span>
         }
@@ -207,7 +207,7 @@ describe('API - useRequest hook', () => {
             return loading ? <span>Loading...</span> : <span>ID: {data && data.id}</span>
         }
 
-        const {rerender, getByText} = render(
+        const {rerender} = render(
             <APIProvider basePath="http://server.fakeapi.com">
                 <PathComponent path="" />
             </APIProvider>,
@@ -235,7 +235,7 @@ describe('API - useRequest hook', () => {
         const children = jest.fn().mockReturnValue(<div />)
 
         const PagingComponent = ({queryParams}: {queryParams: {page: number}}) => {
-            const params = useRequest<{id: number}, any, {page: number}>({path: '', queryParams})
+            const params = useRequest<{id: number}, {}, {page: number}, {}, {id: number}>({path: '', queryParams})
             return children(params)
         }
 
@@ -267,7 +267,7 @@ describe('API - useRequest hook', () => {
         const children = jest.fn().mockReturnValue(<div />)
 
         const PagingComponent = ({queryParams}: {queryParams: {page: number}}) => {
-            const params = useRequest<{id: number}, any, {page: number}>({path: '', queryParams})
+            const params = useRequest<{id: number}, {}, {page: number}, {}, null>({path: '', queryParams})
             return children(params)
         }
 

@@ -1,22 +1,20 @@
 import * as React from 'react'
 import {APIContext, APIProviderProps} from 'context/api'
 import {useDeepCompareEffect} from 'utils'
-import {resolvePath} from './resolvePath'
 import NetworkError from './networkError'
-import {defaultRequestInit} from './baseRequest'
 import {isCancellable} from './isCancellable'
 import {UseRequestProps, RequestState, UseRequestReturn, Cancelable} from './types'
 import request from './index'
 
 // eslint-disable-next-line complexity
-async function fetchData<TData, TRequestBody, TError, TQueryParams>(
+async function fetchData<TData, TRequestBody, TError, TQueryParams, TResponseContent>(
     props: UseRequestProps<TData, TRequestBody, TQueryParams>,
     state: RequestState<TData, TError>,
     setState: (newState: RequestState<TData, TError>) => void,
     context: APIProviderProps,
     abortController: React.MutableRefObject<AbortController>,
 ): Promise<void> {
-    const {base = context.basePath, path, resolve = (d: any) => d as TData, queryParams = {}, body} = props
+    const {base = context.basePath, resolve = (d: any) => d as TData} = props
 
     if (state.loading) {
         abortController.current.abort()
@@ -29,7 +27,7 @@ async function fetchData<TData, TRequestBody, TError, TQueryParams>(
     }
 
     try {
-        const response = await request({...props, base}, signal)
+        const response = await request<any, any, any, TResponseContent>({...props, base}, signal)
         const content = response && response.content
 
         if (signal.aborted) {
@@ -53,9 +51,13 @@ async function fetchData<TData, TRequestBody, TError, TQueryParams>(
 type FetchData = typeof fetchData
 type CancellableFetchData = FetchData | (FetchData & Cancelable)
 
-export function useRequest<TData = any, TError = any, TQueryParams = {[key: string]: any}, TRequestBody = any>(
-    props: UseRequestProps<TData, TRequestBody, TQueryParams>,
-): UseRequestReturn<TData, TError> {
+export function useRequest<
+    TData = any,
+    TError = any,
+    TQueryParams = {[key: string]: any},
+    TRequestBody = any,
+    TResponseContent = any
+>(props: UseRequestProps<TData, TRequestBody, TQueryParams>): UseRequestReturn<TData, TError> {
     const context = React.useContext(APIContext)
 
     const requestData = React.useCallback<CancellableFetchData>(fetchData, [])
@@ -71,7 +73,13 @@ export function useRequest<TData = any, TError = any, TQueryParams = {[key: stri
     const abortController = React.useRef(new AbortController())
 
     useDeepCompareEffect(() => {
-        requestData(props, state, setState, context, abortController)
+        requestData<TData, TRequestBody, TError, TQueryParams, TResponseContent>(
+            props,
+            state,
+            setState,
+            context,
+            abortController,
+        )
 
         return () => {
             abortController.current.abort()
