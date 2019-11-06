@@ -36,7 +36,9 @@ module.exports = {
         {
             files: ['**/*.test.ts?(x)'],
             rules: {
-                'max-lines-per-function': 'off',
+				'max-lines-per-function': 'off',
+				'@typescript-eslint/explicit-function-return-type': 'off',
+				'@typescript-eslint/no-explicit-any': 'off'
             },
         },
     ],
