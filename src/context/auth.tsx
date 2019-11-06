@@ -3,7 +3,7 @@ import {login, logout} from 'lib/auth'
 
 interface AuthContext {
 	login: (email: string, password: string) => Promise<void>;
-	logout: () => void
+	logout: () => void;
 }
 
 const AuthContext = React.createContext<AuthContext>({

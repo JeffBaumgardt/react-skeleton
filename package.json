@@ -39,7 +39,8 @@
         "build": "env-cmd -e development react-scripts build",
         "test": "react-tools test",
         "lint": "react-tools lint",
-        "format": "react-tools format; react-tools lint --quiet --fix"
+        "format": "react-tools format; react-tools lint --quiet --fix",
+        "validate": "env-cmd -e ci react-tools validate test,lint"
     },
     "browserslist": {
         "production": [
