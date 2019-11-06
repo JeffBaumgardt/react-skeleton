@@ -1,6 +1,6 @@
 import NetworkError from './networkError'
 import {ResolvePath} from './resolvePath'
-import {RequestOptions, RequestResponse, Cancelable} from './types'
+import {RequestOptions, RequestResponse} from './types'
 
 const requestHeaders = new Headers({
     Accept: 'application/json',
@@ -12,7 +12,7 @@ export const defaultRequestInit: Partial<RequestInit> = {
     method: 'GET',
 }
 
-export const request = async (url: ResolvePath, requestInit: RequestOptions): Promise<RequestResponse> => {
+export const baseRequest = async (url: ResolvePath, requestInit: RequestOptions): Promise<RequestResponse> => {
     const thisRequest = new Request(url, requestInit)
 
     try {
@@ -29,14 +29,10 @@ export const request = async (url: ResolvePath, requestInit: RequestOptions): Pr
             headers: response.headers,
             content
         }
-    } catch (err) {
-        if (err.name === 'AbortError') {
+	} catch (err) {
+        if (err.name === 'AbortError' || (requestInit.signal && requestInit.signal.aborted)) {
             throw new NetworkError('abort', requestInit)
         }
         throw err
     }
-}
-
-export const isCancellable = <T extends (...args: any[]) => any>(func: T): func is T & Cancelable => {
-    return typeof (func as any).cancel === 'function' && typeof (func as any).flush === 'function'
 }

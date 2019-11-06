@@ -3,6 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@babel/runtime": "^7.7.1",
+		"lodash.isequal": "^4.5.0",
 		"query-string": "^6.8.3",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0",
@@ -15,20 +17,26 @@
 		"semantic-ui-react": "^0.88.1"
 	},
 	"devDependencies": {
+		"@testing-library/dom": "^6.10.0",
+		"@testing-library/jest-dom": "^4.2.3",
+		"@testing-library/react": "^9.3.2",
 		"@types/jest": "24.0.20",
+		"@types/lodash.isequal": "^4.5.5",
 		"@types/node": "12.11.7",
 		"@types/react": "16.9.11",
 		"@types/react-dom": "16.9.3",
 		"@types/react-redux": "^7.1.5",
 		"@types/react-router-dom": "^5.1.0",
 		"env-cmd": "^10.0.1",
+		"isomorphic-fetch": "^2.2.1",
+		"nock": "^11.7.0",
 		"react-tools": "https://github.com/sixgill/react-tools.git",
 		"typescript": "3.6.4"
 	},
 	"scripts": {
 		"start": "env-cmd -e development react-scripts start",
 		"build": "env-cmd -e development react-scripts build",
-		"test": "react-scripts test",
+		"test": "react-tools test",
 		"lint": "react-tools lint",
 		"format": "react-tools format"
 	},

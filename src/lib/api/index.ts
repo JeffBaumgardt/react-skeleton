@@ -1,20 +1,18 @@
 import {getToken} from 'lib/auth'
 import {API_ROOT} from 'appConfig'
-import {request, defaultRequestInit} from './request'
+import {baseRequest, defaultRequestInit} from './baseRequest'
 import {resolvePath} from './resolvePath'
-import {UseRequestProps} from './types'
+import {UseRequestProps, RequestResponse} from './types'
+import NetworkError from './networkError'
 
-export {useRequest} from './useRequest'
-
-export default async function<TData, TRequestBody, TQueryParams>(
+export default async function request<TData, TRequestBody, TQueryParams>(
     props: UseRequestProps<TData, TRequestBody, TQueryParams>,
     signal?: AbortSignal
-) {
+): Promise<RequestResponse | undefined> {
     const {
         base = API_ROOT,
         path,
         queryParams = {},
-        resolve = (d: any) => d as TData,
         body
     } = props
 
@@ -35,12 +33,21 @@ export default async function<TData, TRequestBody, TQueryParams>(
         requestInit.body = typeof body === 'object' ? JSON.stringify(body) : ((body as unknown) as string)
     }
 
-    const response = await request(resolvePath(base, path, {...queryParams}), requestInit)
-    const {content} = response
+	try {
+		const response = await baseRequest(resolvePath(base, path, {...queryParams}), requestInit)
 
-    if (signal && signal.aborted) {
-        return null
-    }
+		if (signal && signal.aborted) {
+			return
+		}
 
-    return resolve(content)
+		return response
+	} catch (err) {
+		// If there is an error that was caused by an abort then don't set state
+		if (err instanceof NetworkError && err.network.reason === 'abort') {
+			return
+		}
+		throw err
+	}
 }
+
+export {useRequest} from './useRequest'

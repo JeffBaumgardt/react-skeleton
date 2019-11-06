@@ -6,13 +6,20 @@ export interface APIProviderProps {
 }
 
 export const APIContext = React.createContext<Required<APIProviderProps>>({
-    basePath: "",
-    requestOptions: {}
+    basePath: '',
+    requestOptions: {},
 })
 
-export const APIProvider: React.FC<APIProviderProps> = ({children}) => {
-    return <APIContext.Provider value={{
-        basePath: "",
-        requestOptions: {},
-    }}>{children}</APIContext.Provider>
+export const APIProvider: React.FC<APIProviderProps> = ({children, ...value}) => {
+    return (
+        <APIContext.Provider
+            value={{
+                basePath: '',
+                requestOptions: {},
+                ...value,
+            }}
+        >
+            {children}
+        </APIContext.Provider>
+    )
 }
