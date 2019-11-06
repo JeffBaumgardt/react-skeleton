@@ -4,7 +4,7 @@ type AuthContext = {}
 
 const AuthContext = React.createContext<AuthContext>({})
 
-const AuthProvider: React.FC = (props) => {
+const AuthProvider: React.FC = props => {
     return <AuthContext.Provider value={{}} {...props} />
 }
 

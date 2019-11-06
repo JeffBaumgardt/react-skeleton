@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {APIContext, APIProviderProps} from 'context/api'
 import {useDeepCompareEffect} from 'utils'
-import { resolvePath } from './resolvePath'
+import {resolvePath} from './resolvePath'
 import NetworkError from './networkError'
-import { defaultRequestInit } from './baseRequest'
+import {defaultRequestInit} from './baseRequest'
 import {isCancellable} from './isCancellable'
-import { UseRequestProps, RequestState, UseRequestReturn, Cancelable } from './types'
+import {UseRequestProps, RequestState, UseRequestReturn, Cancelable} from './types'
 import request from './index'
 
 // eslint-disable-next-line complexity
@@ -16,7 +16,7 @@ async function fetchData<TData, TRequestBody, TError, TQueryParams>(
     context: APIProviderProps,
     abortController: React.MutableRefObject<AbortController>,
 ): Promise<void> {
-	const { base = context.basePath, path, resolve = (d: any) => d as TData, queryParams = {}, body } = props
+    const {base = context.basePath, path, resolve = (d: any) => d as TData, queryParams = {}, body} = props
 
     if (state.loading) {
         abortController.current.abort()
@@ -28,20 +28,20 @@ async function fetchData<TData, TRequestBody, TError, TQueryParams>(
         setState({...state, error: null, loading: true})
     }
 
-	try {
-		const response = await request({...props, base}, signal)
+    try {
+        const response = await request({...props, base}, signal)
         const content = response && response.content
 
-		if (signal.aborted) {
+        if (signal.aborted) {
             return
         }
 
         setState({...state, error: null, loading: false, data: resolve(content)})
-	} catch (err) {
-		// If there is an error that was caused by an abort then don't set state
-		if (err instanceof NetworkError && err.network.reason === 'abort') {
-			return
-		}
+    } catch (err) {
+        // If there is an error that was caused by an abort then don't set state
+        if (err instanceof NetworkError && err.network.reason === 'abort') {
+            return
+        }
         const error = {
             message: `Failed to fetch: ${err.message}`,
             data: err.message,
@@ -70,7 +70,7 @@ export function useRequest<TData = any, TError = any, TQueryParams = {[key: stri
 
     const abortController = React.useRef(new AbortController())
 
-	useDeepCompareEffect(() => {
+    useDeepCompareEffect(() => {
         requestData(props, state, setState, context, abortController)
 
         return () => {

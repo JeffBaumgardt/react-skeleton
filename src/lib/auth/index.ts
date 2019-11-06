@@ -11,7 +11,4 @@ const getToken = (): string | null => {
     return window.localStorage.getItem('authKey')
 }
 
-export {
-    setToken,
-    getToken
-}
+export {setToken, getToken}

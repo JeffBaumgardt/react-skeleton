@@ -2,7 +2,7 @@ import React from 'react'
 import isEqual from 'lodash.isequal'
 
 function useDeepCompareMemoize(value: Readonly<any>) {
-	const ref = React.useRef<any>()
+    const ref = React.useRef<any>()
 
     if (!isEqual(value, ref.current)) {
         ref.current = value
@@ -11,9 +11,6 @@ function useDeepCompareMemoize(value: Readonly<any>) {
     return ref.current
 }
 
-export function useDeepCompareEffect<T>(
-    callback: React.EffectCallback,
-    dependencies: T
-) {
+export function useDeepCompareEffect<T>(callback: React.EffectCallback, dependencies: T) {
     React.useEffect(callback, useDeepCompareMemoize(dependencies))
 }

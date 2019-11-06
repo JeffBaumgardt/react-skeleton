@@ -4,7 +4,7 @@ import {RequestOptions, RequestResponse} from './types'
 
 const requestHeaders = new Headers({
     Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
 })
 
 export const defaultRequestInit: Partial<RequestInit> = {
@@ -27,9 +27,9 @@ export const baseRequest = async (url: ResolvePath, requestInit: RequestOptions)
             status: response.status,
             statusText: response.statusText,
             headers: response.headers,
-            content
+            content,
         }
-	} catch (err) {
+    } catch (err) {
         if (err.name === 'AbortError' || (requestInit.signal && requestInit.signal.aborted)) {
             throw new NetworkError('abort', requestInit)
         }
