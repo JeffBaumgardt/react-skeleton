@@ -1,4 +1,3 @@
-import request, {UseRequestProps} from 'lib/api'
 import Storage from 'lib/storage'
 import {APP_NAME} from '../../appConfig'
 // Much more work to be done here. Just setting up some minor stuff for now.
@@ -15,18 +14,7 @@ interface LoginRequestBody {
 export const login = async (email: string, password: string): Promise<void> => {
 	const body = { email, password, applicationId: APP_NAME }
 
-    const requestProps: UseRequestProps<any, LoginRequestBody, any> = {
-        path: '/v2/login',
-        method: 'POST',
-        body,
-    }
-
-    try {
-        const {content} = await request<any, LoginRequestBody, {}, {token: string}>(requestProps)
-        Storage.save('token', content.token)
-    } catch (err) {
-        throw new Error('loginError')
-    }
+	// implement auth api
 }
 
 export const logout = () => {
