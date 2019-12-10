@@ -1,36 +1,44 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Project Layout
+
 This project has a slightly opinionated layout.
 
 ### Components
 
-All generic purpose, multiuse components will live here. These include wrappers, hoc's, or anything else that does not relate to a specific page.
+All generic purpose, multiuse components will live here. These include wrappers, hoc's, or anything else that does not
+relate to a specific page.
 
 ### Pages
 
-All page components. These are very likely to also be found as routes in `routes.jsx`. They are pages/routes in your app.
+All page components. These are very likely to also be found as routes in `routes.jsx`. They are pages/routes in your
+app.
 
 ### lib
 
-Library files that are used in the entirity of the project, such as auth, api, redux and so on.<br />These are imported via `import "" from 'lib/...`
+Library files that are used in the entirity of the project, such as auth, api, redux and so on.<br />These are imported
+via `import "" from 'lib/...`
 
 ### context
 
-Context files are wrapping the entire project. These contexts are providers for the entire project, such as Router, Redux, Auth and Theme.<br />For instance you can use the auth context in a component by accessing the auth context
+Context files are wrapping the entire project. These contexts are providers for the entire project, such as Router,
+Redux, Auth and Theme.<br />For instance you can use the auth context in a component by accessing the auth context
+
 ```js
 import useAuth from 'context/auth'
 
 const logoutButton = () => {
-	const {logout} = useAuth()
+    const {logout} = useAuth()
 
-	return <button onClick={logout}>Logout</button>
+    return <button onClick={logout}>Logout</button>
 }
 ```
 
 ### styles
 
-The styles directory. This would be where you would import you css files or make generic jss functions for the entire app
+The styles directory. This would be where you would import you css files or make generic jss functions for the entire
+app
+
 ```js
 import {makeStyles} from '@material-ui/core/styles'
 
@@ -43,7 +51,51 @@ export function useGlobalStyles = makeStyles(theme => ({
 	}
 }))
 ```
+
 More information about [makeStyles hook](https://material-ui.com/styles/api/#makestyles-styles-options-hook).
+
+## Project configuration
+
+The project has several configs for various tasks. From enviromental flags to lint configs I'll try to explain what each
+is for and how to use them.
+
+### `.eslintrc.js`
+
+Project wide lint rules can be found here. For more information about rules please see
+[eslint's documentation](https://eslint.org/docs/user-guide/configuring)
+
+### `.prettierrc`
+
+Prettier formats you code (usually on save, check your editor for settings). This makes code uniform between commits and
+other developers. Making it easier to read and understand code without formatting getting in the way. More infomation at
+[prettier docs](https://prettier.io/docs/en/index.html)
+
+### `jsconfig.json`
+
+This config file is for the editor and bundler to find and execute your code correctly. Most used is the relative
+imports by selecting a baseURL reference. So instead of an import looking like
+`import Foo from '../../../../../Components/Foo'` it can look like `import Foo from 'Components/Foo'` This file most
+likely will never need to be updated. Details about jsconfig.json
+[can be found here](https://code.visualstudio.com/docs/languages/jsconfig)
+
+### `.env-cmdrc`
+
+The enviroment config file is needed for an flags that will be enviroment specific, like an api endpoint. In this file
+we have sections to breakdown each enviroment, development, staging, production and so on. To use any flag in the app,
+the flag must be preffeced with `REACT_APP` ie `REACT_APP_API_ROOT`. Only flags that begin with the react app will be
+exposed to the running project.
+
+### `src/appConfig.js`
+
+This is the internal flags config. This reads the env flags at server startup or are built at build time. This is the
+best place to store the env flags that your app will use vs trying to inspect `process.env.REACT_APP_SOME_FLAG` multiple
+times in the project.
+
+### `src/setupTests.js`
+
+The setup tests are a reference to jest's setupFileAfterEnv option. This file is executed before all test files. This is
+the best place to include any global imports like `jest-dom` or mocks. For create-react-app specific infomation please
+[refer to the docs](https://create-react-app.dev/docs/running-tests/)
 
 ## Available Scripts
 
