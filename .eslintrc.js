@@ -1,5 +1,6 @@
 module.exports = {
-    extends: ['react-app'],
+	extends: ['react-app', 'prettier'],
+	plugins: ['jest', 'babel', 'jsx-a11y'],
     rules: {
         'react/prop-types': 'off', // we have TS!
         'react/no-did-mount-set-state': 'off',
