@@ -9,7 +9,7 @@ class Storage {
 		return `${APP_NAME}_${key}`
 	}
 
-	etch(key) {
+	fetch(key) {
 		const storeKey = this.getStoreKey(key)
 		if (window.localStorage[storeKey]) {
 			return JSON.parse(window.localStorage.getItem(storeKey) || '')
