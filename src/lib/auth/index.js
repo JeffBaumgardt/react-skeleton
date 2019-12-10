@@ -5,13 +5,7 @@ import {APP_NAME} from '../../appConfig'
 // Need login logic
 // Need logot logic.
 
-interface LoginRequestBody {
-    email: string;
-    password: string;
-    applicationId: string;
-}
-
-export const login = async (email: string, password: string): Promise<void> => {
+export const login = async (email, password) => {
 	const body = { email, password, applicationId: APP_NAME }
 
 	// implement auth api
@@ -23,10 +17,10 @@ export const logout = () => {
 	window.location.href = '/'
 }
 
-export const setToken = (token: string) => {
+export const setToken = token => {
     window.localStorage.setItem('authKey', token)
 }
 
-export const getToken = (): string | null => {
+export const getToken = () => {
     return window.localStorage.getItem('authKey')
 }

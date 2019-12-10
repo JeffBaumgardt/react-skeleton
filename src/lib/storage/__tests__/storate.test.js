@@ -11,7 +11,7 @@ describe('Storage', () => {
 	})
 
 	test('Can clear the storage', () => {
-		Storage.save<string>('fakeKey', '')
+		Storage.save('fakeKey', '')
 		expect(window.localStorage).toHaveLength(1)
 
 		Storage.clear()

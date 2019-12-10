@@ -1,5 +1,5 @@
 module.exports = {
-    extends: ['react-app', './node_modules/react-tools/eslint.js'],
+    extends: ['react-app'],
     rules: {
         'react/prop-types': 'off', // we have TS!
         'react/no-did-mount-set-state': 'off',
@@ -24,22 +24,5 @@ module.exports = {
         'no-console': 'warn',
         'jest/prefer-called-with': 'warn',
         'jest/valid-expect-in-promise': 'warn',
-        '@typescript-eslint/no-var-requires': 'off',
-    },
-    overrides: [
-        {
-            files: ['**/*.ts?(x)'],
-            rules: {
-                'no-undef': 'off', // eslint fires no-undef in type annotations, bad
-            },
-        },
-        {
-            files: ['**/*.test.ts?(x)'],
-            rules: {
-				'max-lines-per-function': 'off',
-				'@typescript-eslint/explicit-function-return-type': 'off',
-				'@typescript-eslint/no-explicit-any': 'off'
-            },
-        },
-    ],
+    }
 }

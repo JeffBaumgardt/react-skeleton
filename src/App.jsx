@@ -5,7 +5,7 @@ import Routes from 'Pages/Routes'
 import config from './appConfig'
 
 
-const App: React.FC = () => {
+const App = () => {
     return (
         <AppProviders config={config}>
             <Routes />

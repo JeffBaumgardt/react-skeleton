@@ -4,7 +4,7 @@ import * as React from 'react'
 
 export const store = configureStore()
 
-const ReduxProvider: React.FC = ({children}) => {
+const ReduxProvider = ({children}) => {
     return <Provider store={store}>{children}</Provider>
 }
 

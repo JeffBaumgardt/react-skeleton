@@ -1,15 +1,15 @@
 import {APP_NAME} from '../../appConfig'
 
 class Storage {
-	public clear() {
+	clear() {
 		window.localStorage.clear()
 	}
 
-	private getStoreKey(key: string): string {
+	getStoreKey(key) {
 		return `${APP_NAME}_${key}`
 	}
 
-	private fetch(key: string): string | null {
+	etch(key) {
 		const storeKey = this.getStoreKey(key)
 		if (window.localStorage[storeKey]) {
 			return JSON.parse(window.localStorage.getItem(storeKey) || '')
@@ -17,7 +17,7 @@ class Storage {
 		return null
 	}
 
-	private store<TValue>(key: string, value: TValue): void {
+	store(key, value) {
 		const storeKey = this.getStoreKey(key)
 		if (value === null || value === undefined) {
 			window.localStorage.removeItem(storeKey)
@@ -26,11 +26,11 @@ class Storage {
 		}
 	}
 
-	public save<TValue>(key: string, value: TValue) {
+	save(key, value) {
 		this.store(key, value)
 	}
 
-	public get(key: string) {
+	get(key) {
 		return this.fetch(key)
 	}
 }
